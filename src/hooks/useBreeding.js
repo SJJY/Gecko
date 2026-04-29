@@ -15,10 +15,14 @@ import { matchComboMorphs } from '../engine/comboMatcher.js';
  */
 export function useBreeding(fatherGenes, motherGenes, fatherSelective, motherSelective) {
   const results = useMemo(() => {
+    // 防御性初始化
+    const fGenes = fatherGenes || {};
+    const mGenes = motherGenes || {};
+
     // 收集所有参与计算的基因 ID（取两亲本的并集，排除 selective）
     const allGeneIds = new Set([
-      ...Object.keys(fatherGenes),
-      ...Object.keys(motherGenes),
+      ...Object.keys(fGenes),
+      ...Object.keys(mGenes),
     ]);
 
     if (allGeneIds.size === 0) return [];
@@ -29,8 +33,8 @@ export function useBreeding(fatherGenes, motherGenes, fatherSelective, motherSel
       const gene = geneMap[geneId];
       if (!gene || gene.type === "selective") continue;
 
-      const fState = fatherGenes[geneId] || getDefaultState(gene.type);
-      const mState = motherGenes[geneId] || getDefaultState(gene.type);
+      const fState = fGenes[geneId] || getDefaultState(gene.type);
+      const mState = mGenes[geneId] || getDefaultState(gene.type);
 
       const outcomes = calcSingleGene(gene.type, fState, mState);
       if (outcomes.length > 0) {
@@ -74,5 +78,7 @@ function getDefaultState(type) {
 }
 
 function mergeSelectiveTags(fatherSelective, motherSelective) {
-  return [...new Set([...fatherSelective, ...motherSelective])];
+  const f = Array.isArray(fatherSelective) ? fatherSelective : [];
+  const m = Array.isArray(motherSelective) ? motherSelective : [];
+  return [...new Set([...f, ...m])];
 }

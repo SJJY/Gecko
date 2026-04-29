@@ -1,4 +1,12 @@
 import { conflictGroups } from '../data/rules.js';
+import { geneMap } from '../data/genes.js';
+
+const validStates = {
+  recessive:   new Set(['homo', 'het', 'none']),
+  dominant:    new Set(['present', 'absent']),
+  codominant:  new Set(['super', 'het', 'none']),
+  selective:   new Set(['present']),
+};
 
 /**
  * 校验一组选中的基因 ID 是否存在互斥冲突
@@ -20,6 +28,20 @@ export function validateConflicts(selectedGeneIds) {
   }
 
   return conflicts;
+}
+
+/**
+ * 校验某个基因的状态是否合法
+ * @param {string} geneId
+ * @param {string} state
+ * @returns {boolean}
+ */
+export function isValidState(geneId, state) {
+  const gene = geneMap[geneId];
+  if (!gene) return false;
+  const allowed = validStates[gene.type];
+  if (!allowed) return false;
+  return allowed.has(state);
 }
 
 /**
