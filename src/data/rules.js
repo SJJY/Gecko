@@ -23,10 +23,10 @@ export const superGeneList = [
 
 // 选育基因（不参与孟德尔概率计算）
 export const selectiveGeneList = [
-  "tangerine", "carrottail", "striped", "bold", "highcolor", "lavender",
+  "tangelo", "tangerine", "carrottail", "striped", "bold", "highcolor", "lavender",
   "reverse_stripe", "jungle", "bandit", "mosaic", "calico",
   "orange_ghost", "yellow_ghost", "blackpearl", "copper", "saffron",
   "mandarin", "red_ridge", "cream", "mocha", "chocolate", "charcoal",
-  "ash", "midnight", "smoky", "pastel", "cinnamon", "rust",
+  "ash", "midnight", "smoky", "cinnamon", "rust",
   "sand", "desert", "stone", "earth",
 ];

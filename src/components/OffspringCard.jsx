@@ -8,11 +8,29 @@ const stateDisplay = {
   none: { text: '',     badge: '' },
   // 共显性
   super: { text: 'Super', badge: 'bg-yellow-500/80 text-white' },
-  // het 已在上面
   // 显性
   present: { text: '表现', badge: 'bg-amber-500/80 text-white' },
   absent:  { text: '',     badge: '' },
 };
+
+/** 根据基因类型和状态生成合适的显示文本 */
+function getDisplayText(g) {
+  if (g.type === 'codominant') {
+    if (g.state === 'super') return `超级${g.geneName}`;
+    if (g.state === 'het')   return g.geneName;
+    return null;
+  }
+  if (g.type === 'recessive') {
+    if (g.state === 'homo') return g.geneName;
+    if (g.state === 'het')  return `het ${g.geneName}`;
+    return null;
+  }
+  if (g.type === 'dominant') {
+    if (g.state === 'present') return g.geneName;
+    return null;
+  }
+  return null;
+}
 
 function formatPercent(p) {
   const pct = p * 100;
@@ -66,10 +84,11 @@ export default function OffspringCard({ combo }) {
             <div className="flex flex-wrap gap-1.5">
               {expressed.map(g => {
                 const display = stateDisplay[g.state] || {};
+                const text = getDisplayText(g);
+                if (!text) return null;
                 return (
                   <span key={g.geneId} className={`px-2 py-0.5 rounded-full text-xs font-medium ${display.badge}`}>
-                    {g.state === 'super' ? `超级${g.geneName}` : g.geneName}
-                    {g.state === 'het' && g.type === 'codominant' ? '' : ''}
+                    {text}
                   </span>
                 );
               })}

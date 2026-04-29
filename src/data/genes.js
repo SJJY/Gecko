@@ -12,6 +12,8 @@ export const genes = [
   { id: "blizzard",    name: "暴风雪",      type: "recessive",   hasSuper: false },
   { id: "patternless", name: "墨菲无纹",    type: "recessive",   hasSuper: false },
   { id: "eclipse",     name: "日蚀眼",      type: "recessive",   hasSuper: false },
+  { id: "marble_eye",  name: "大理石眼",   type: "recessive",   hasSuper: false },
+  { id: "noir_desir",  name: "欲望黑眼",   type: "recessive",   hasSuper: false },
 
   // ── 显性 dominant ──
   { id: "enigma",      name: "谜",          type: "dominant",    hasSuper: false },
@@ -20,6 +22,7 @@ export const genes = [
   { id: "blacknight",  name: "黑夜",        type: "dominant",    hasSuper: false },
   { id: "emerald",     name: "翡翠",        type: "dominant",    hasSuper: false },
   { id: "radioactive", name: "辐射",        type: "dominant",    hasSuper: false },
+  { id: "pastel",      name: "蜡笔",        type: "dominant",    hasSuper: false },
 
   // ── 共显性 codominant ──
   { id: "macksnow",    name: "马克雪花",    type: "codominant",  hasSuper: true },
@@ -31,6 +34,7 @@ export const genes = [
   { id: "hypo",        name: "少点",        type: "codominant",  hasSuper: true },
 
   // ── 选育 selective ──
+  { id: "tangelo",       name: "橘柚",        type: "selective",  hasSuper: false },
   { id: "tangerine",     name: "橘化",        type: "selective",  hasSuper: false },
   { id: "carrottail",    name: "萝卜尾",      type: "selective",  hasSuper: false },
   { id: "striped",       name: "直线",        type: "selective",  hasSuper: false },
